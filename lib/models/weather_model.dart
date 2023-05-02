@@ -13,7 +13,8 @@ class WeatherModel {
       required this.weatherCondition});
 
   factory WeatherModel.fromJson(dynamic data) {
-    var jsonData = data["forecast"]["forecastday"][0];
+
+    var jsonData = data["forecast"]["forecastday"][0]["day"];
 
     return WeatherModel(
         date: data["location"]["localtime"],
@@ -21,5 +22,11 @@ class WeatherModel {
         minTemp: jsonData["mintemp_c"],
         maxTemp: jsonData["maxtemp_c"],
         weatherCondition: jsonData["condition"]["text"]);
+  }
+
+  @override
+  String toString() {
+
+    return "temp=$avgTemp\nminTemp=$minTemp\nmaxTemp=$maxTemp\ncondition=$weatherCondition";
   }
 }

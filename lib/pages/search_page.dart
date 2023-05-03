@@ -20,23 +20,39 @@ class SearchPage extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: TextField(
-            decoration: InputDecoration(
-                prefixIcon: Icon(Icons.search),
-                label: Text("Search"),
-                contentPadding:
-                    EdgeInsets.symmetric(vertical: 32, horizontal: 24),
-                border: OutlineInputBorder(),
-                hintText: "Enter a City"),
+            onChanged: (data) {
+              cityName = data;
+            },
             onSubmitted: (data) async {
               cityName = data;
               var service = WeatherService();
               WeatherModel weather =
                   await service.getWeather(cityName: cityName);
-              Provider.of<WeatherProvider>(context,listen: false).weatherData = weather;
-              Provider.of<WeatherProvider>(context,listen: false).cityName=cityName;
+              Provider.of<WeatherProvider>(context, listen: false).weatherData =
+                  weather;
+              Provider.of<WeatherProvider>(context, listen: false).cityName =
+                  cityName;
               Navigator.pop(context);
-
             },
+            decoration: InputDecoration(
+                suffix: GestureDetector(
+                  child: Icon(Icons.search),
+                  onTap: ()async {
+                    var service = WeatherService();
+                    WeatherModel weather =
+                    await service.getWeather(cityName: cityName);
+                    Provider.of<WeatherProvider>(context, listen: false).weatherData =
+                        weather;
+                    Provider.of<WeatherProvider>(context, listen: false).cityName =
+                        cityName;
+                    Navigator.pop(context);
+                  },
+                ),
+                label: Text("Search"),
+                contentPadding:
+                    EdgeInsets.symmetric(vertical: 32, horizontal: 24),
+                border: OutlineInputBorder(),
+                hintText: "Enter a City"),
           ),
         ),
       ),

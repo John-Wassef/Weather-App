@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:weather_app/models/weather_model.dart';
 import 'package:weather_app/pages/search_page.dart';
-
 import '../providers/weather_provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -17,9 +16,10 @@ class _HomePageState extends State<HomePage> {
 
     });
   }
-
+  WeatherModel? weatherData;
   @override
   Widget build(BuildContext context) {
+    weatherData=Provider.of<WeatherProvider>(context).weatherData;
     return Scaffold(
         appBar: AppBar(
           actions: [
@@ -52,7 +52,20 @@ class _HomePageState extends State<HomePage> {
                 ]),
               )
             : Container(
-                color: Colors.orange,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors:
+              [
+                weatherData!.getThemeColor(),
+                weatherData!.getThemeColor()[300]!,
+                weatherData!.getThemeColor()[100]!,
+
+              ],
+              begin: Alignment.topCenter,
+              end:Alignment.bottomCenter ,
+            )
+          ),
+
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -60,14 +73,14 @@ class _HomePageState extends State<HomePage> {
                       flex: 3,
                     ),
                     Text(
-                      "Cairo",
+                      "${Provider.of<WeatherProvider>(context).cityName}",
                       style: TextStyle(
                         fontSize: 32,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     Text(
-                      "updated 12-8-2022",
+                      "${weatherData!.date}",
                       style: TextStyle(
                         fontSize: 24,
                       ),
@@ -76,9 +89,9 @@ class _HomePageState extends State<HomePage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Image.asset("assets/images/clear.png"),
+                        Image.asset(weatherData!.getImage()),
                         Text(
-                          "30",
+                          "${weatherData!.avgTemp.toInt()}",
                           style: TextStyle(
                             fontSize: 32,
                             fontWeight: FontWeight.bold,
@@ -87,10 +100,10 @@ class _HomePageState extends State<HomePage> {
                         Column(
                           children: [
                             Text(
-                              "maxTemp 30",
+                              "maxTemp: ${weatherData!.maxTemp.toInt()}",
                             ),
                             Text(
-                              "minTemp 30",
+                              "minTemp: ${weatherData!.minTemp.toInt()}",
                             ),
                           ],
                         )
@@ -98,7 +111,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     Spacer(),
                     Text(
-                      "Clear",
+                      "${weatherData!.weatherCondition}",
                       style: TextStyle(
                         fontSize: 32,
                         fontWeight: FontWeight.bold,

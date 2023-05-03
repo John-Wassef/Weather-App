@@ -7,16 +7,13 @@ import 'package:weather_app/pages/search_page.dart';
 import '../providers/weather_provider.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key? key}) : super(key: key);
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  void updateUi() {
-    setState(() {});
-  }
   WeatherModel? weatherData;
   @override
   Widget build(BuildContext context) {
@@ -31,19 +28,17 @@ class _HomePageState extends State<HomePage> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => SearchPage(
-                              updateUi: updateUi,
-                            )));
+                        builder: (context) => SearchPage()));
               },
-              icon: Icon(Icons.search),
+              icon: const Icon(Icons.search),
             )
           ],
-          title: Text("Weather App"),
+          title: const Text("Weather App"),
         ),
         body: ConditionalBuilder(
     condition: Provider.of<WeatherProvider>(context).weatherData == null ,
     builder: (context)=>  Center(
-      child: Column(mainAxisSize: MainAxisSize.min, children: [
+      child: Column(mainAxisSize: MainAxisSize.min, children: const [
         Text(
           'there is no weather 😔 start',
           textAlign: TextAlign.center,
@@ -73,30 +68,30 @@ class _HomePageState extends State<HomePage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Spacer(
+          const Spacer(
             flex: 3,
           ),
           Text(
             "${Provider.of<WeatherProvider>(context).cityName}",
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 32,
               fontWeight: FontWeight.bold,
             ),
           ),
           Text(
             'updated at  ${weatherData!.date.hour}:${weatherData!.date.minute}',
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 24,
             ),
           ),
-          Spacer(),
+          const Spacer(),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Image.asset(weatherData!.getImage()),
               Text(
                 "${weatherData!.avgTemp.toInt()}",
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 32,
                   fontWeight: FontWeight.bold,
                 ),
@@ -113,15 +108,15 @@ class _HomePageState extends State<HomePage> {
               )
             ],
           ),
-          Spacer(),
+          const Spacer(),
           Text(
-            "${weatherData!.weatherCondition}",
-            style: TextStyle(
+            weatherData!.weatherCondition,
+            style: const TextStyle(
               fontSize: 32,
               fontWeight: FontWeight.bold,
             ),
           ),
-          Spacer(
+          const Spacer(
             flex: 5,
           )
         ],

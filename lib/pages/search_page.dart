@@ -6,15 +6,12 @@ import 'package:weather_app/services/weather_service.dart';
 
 class SearchPage extends StatelessWidget {
   var cityName;
-  VoidCallback? updateUi;
-
-  SearchPage({this.updateUi});
-
+  SearchPage({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Search a City"),
+        title: const Text("Search a City"),
       ),
       body: Center(
         child: Padding(
@@ -36,7 +33,7 @@ class SearchPage extends StatelessWidget {
             },
             decoration: InputDecoration(
                 suffix: GestureDetector(
-                  child: Icon(Icons.search),
+                  child: const Icon(Icons.search),
                   onTap: () async {
                     var service = WeatherService();
                     WeatherModel? weather =
@@ -48,10 +45,10 @@ class SearchPage extends StatelessWidget {
                     Navigator.pop(context);
                   },
                 ),
-                label: Text("Search"),
+                label: const Text("Search"),
                 contentPadding:
-                    EdgeInsets.symmetric(vertical: 32, horizontal: 24),
-                border: OutlineInputBorder(),
+                    const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
+                border: const OutlineInputBorder(),
                 hintText: "Enter a City"),
           ),
         ),

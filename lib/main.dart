@@ -8,7 +8,7 @@ void main() {
       create: (context) {
         return WeatherProvider();
       },
-      child: MyApp()));
+      child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
                   : Provider.of<WeatherProvider>(context)
                       .weatherData!
                       .getThemeColor()),
-      home: HomePage(),
+      home: const HomePage(),
     );
   }
 }

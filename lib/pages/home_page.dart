@@ -80,7 +80,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     Text(
-                      "updated at ${weatherData!.date.hour}:${weatherData!.date.minute}",
+                      'updated at  ${weatherData!.date.hour}:${weatherData!.date.minute}',
                       style: TextStyle(
                         fontSize: 24,
                       ),

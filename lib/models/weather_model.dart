@@ -30,3 +30,4 @@ class WeatherModel {
     return "temp=$avgTemp\nminTemp=$minTemp\nmaxTemp=$maxTemp\ncondition=$weatherCondition";
   }
 }
+
